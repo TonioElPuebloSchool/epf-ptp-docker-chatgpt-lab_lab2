@@ -27,7 +27,6 @@ def codegen():
     args = request.args
     language = args.get("language")
     content = args.get("content")
-    parsed_content = urllib.parse.quote(content)
     prompt = f"Generate a {language} code snippet based on the following content:\n\n{content}\n\nCode:"
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
