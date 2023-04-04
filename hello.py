@@ -27,7 +27,7 @@ def codegen():
     args = request.args
     language = args.get("language")
     content = args.get("content")
-    prompt = f"Hi ChatGPT, please generate a {language} portion of code based on the following content:\n\n{content}\n\nCode:"
+    prompt = f"Hi ChatGPT, please generate a {language} portion of code based on the following content:\n{content}"
     completion = openai.ChatCompletion.create(
         model="gpt-3.5-turbo",
         messages=[{"role": "user", "content": prompt}]
