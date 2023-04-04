@@ -22,11 +22,22 @@ def chatgpt():
     )
     return completion['choices'][0]['message']['content']
 
-# Define codegen function
-@app.route('/chatgpt_dev')
-def codegen(language, content):
+@app.route('/codegen')
+def codegen():
+    args = request.args
+    language = args.get("language")
+    content = args.get("content")
+    parsed_content = urllib.parse.quote(content)
     prompt = f"Generate a {language} code snippet based on the following content:\n\n{content}\n\nCode:"
-    return chatgpt(prompt)
+    completion = openai.Completion.create(
+        engine="text-davinci-002",
+        prompt=prompt,
+        max_tokens=1024,
+        n=1,
+        stop=None,
+        temperature=0.7,
+    )
+    return f"Generated {language} code snippet for:\n\n{content}\n\nCode:\n\n{completion.choices[0].text.strip()}"
 
 
 
