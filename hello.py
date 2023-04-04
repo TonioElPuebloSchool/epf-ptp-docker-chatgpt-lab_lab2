@@ -23,7 +23,7 @@ def chatgpt():
     return completion['choices'][0]['message']['content']
 
 # Define codegen function
-@app.route('/chatgpt')
+@app.route('/chatgpt_dev')
 def codegen(language, content):
     prompt = f"Generate a {language} code snippet based on the following content:\n\n{content}\n\nCode:"
     return chatgpt(prompt)
